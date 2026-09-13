@@ -1,0 +1,73 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+
+# Model artifacts
+models/
+checkpoints/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Data artifacts (large files)
+data/raw/
+data/interim/
+
+# Results
+results/
+plots/
+benchmarks/
+
+# Environment
+.venv/
+venv/
+env/
+ENV/
+bin/
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/checkpoints/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CI/Testing
+.pytest_cache/
+.mypy_cache/
+coverage.xml
+
+# Documentation builds
+site/
+mkdocs/
+
+# Temporary
+*.tmp
+temp/
+
+# Logs
+*.log
+logs/
+
+# Git
+*.orig
+
+# Experiment data
+experiments/*.json
+experiments/*.csv
+
+# Large binary caches
+*.cache
+.huggingface/
