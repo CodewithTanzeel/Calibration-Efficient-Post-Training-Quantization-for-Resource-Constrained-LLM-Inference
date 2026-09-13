@@ -25,9 +25,8 @@ This project implements and evaluates **SmoothQuant** for post-training quantiza
 
 ## Implementation Details
 
-### Technical Approach
-
-1. **SmoothQuant Implementation**:
+### Technical Approach (Updated for Issue #1 — Calibrator Pipeline)
+1. **SmoothQuant Implementation**: ✅ Implemented `SmoothQuantCalibrator` (hook-based activation tracking, smoothing factor computation `s = act_max^α / weight_max^(1-α)`, weight scaling, epsilon/clamping).
    - Collect activation statistics during calibration
    - Compute per-layer smoothing factors: $s = \text{act\_max}^{\alpha} / \text{weight\_max}^{1-\alpha}$
    - Scale weights by $1/s$ and apply smoothing during inference
