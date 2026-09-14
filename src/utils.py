@@ -54,7 +54,7 @@ def load_calibration_data(
     Returns:
         List of (input_ids, labels) tuples.
     """
-    dataset = load_dataset(dataset_name, split=split)
+    dataset = load_dataset(dataset_name, 'wikitext-2-raw-v1', split=split)
     tokenizer = AutoTokenizer.from_pretrained('gpt2')
 
     if tokenizer.pad_token is None:
