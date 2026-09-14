@@ -71,3 +71,4 @@ experiments/*.csv
 # Large binary caches
 *.cache
 .huggingface/
+.env
