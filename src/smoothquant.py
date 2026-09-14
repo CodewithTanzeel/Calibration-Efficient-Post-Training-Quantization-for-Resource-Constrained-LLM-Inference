@@ -69,11 +69,21 @@ class SmoothQuantCalibrator:
                 # Move batch to model device
                 if isinstance(batch, dict):
                     batch = {k: v.to(next(self.model.parameters()).device) for k, v in batch.items()}
+                elif isinstance(batch, (list, tuple)):
+                    batch = tuple(item.to(next(self.model.parameters()).device) for item in batch)
                 else:
                     batch = batch.to(next(self.model.parameters()).device)
 
-                _ = self.model(**batch) if isinstance(batch, dict) else self.model(batch)
-                count += batch.get('input_ids', batch).size(0) if isinstance(batch, dict) else batch.size(0)
+                # Run model forward (extract input tensor from tuple/dict)
+                if isinstance(batch, dict):
+                    _ = self.model(**batch)
+                    count += batch.get('input_ids', batch).size(0)
+                elif isinstance(batch, (list, tuple)):
+                    _ = self.model(batch[0])
+                    count += batch[0].size(0)
+                else:
+                    _ = self.model(batch)
+                    count += batch.size(0)
 
         self.remove_hooks()
         return self.compute_smoothing_factors()
