@@ -1,0 +1,22 @@
+Test prompts for SmoothQuant Real-Time CLI (chat_realtime.py)
+Usage: run python scripts/chat_realtime.py, choose technique (fp32/naive_int8/smoothquant alpha=0.5 or 0.7), enter prompts below.
+
+PROMPT 1 (fact):
+> The capital of France is
+Expected behavior: model continues with Paris-related text (FP32 best, Naive may drift slightly, SmoothQuant α=0.7 closest to FP32). Check session log for token counts and time.
+
+PROMPT 2 (short):
+> Once upon a time
+Expected: story continuation. Note: vague start -> model may diverge; use longer prompts for reliable output.
+
+PROMPT 3 (technical):
+> Quantization is a method to
+Expected: technical continuation related to compression/numbers.
+
+VALIDATION METHOD:
+1. Check results/session_YYYY-MM-DD.json for input/response/time per turn.
+2. Compare techniques: FP32 (18.5 PPL reference) vs Naive INT8 (~21.3, faster 125MB) vs SmoothQuant α=0.7 (~19.1, 125MB, closest accuracy).
+3. Confirm streaming vs batch: stream=y shows live partial tokens (normal); stream=n waits then prints full response.
+4. If response seems broken (like "hi" -> encyclopedia fragments), it is not a code error — it is gpt2's unaligned training data responding to ambiguous input. Use specific prompts for meaningful validation.
+
+File created by Claude Code — project: Calibration-Efficient Post-Training Quantization for Resource-Constrained LLM Inference.
