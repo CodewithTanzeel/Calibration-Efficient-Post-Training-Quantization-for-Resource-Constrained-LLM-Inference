@@ -20,14 +20,12 @@ def run_baseline_experiment(model_name, dataset_name, calibration_size=500):
     print(f"Running baseline experiment for {model_name} on {dataset_name}")
 
     # Import from source (lazy import for faster startup)
-    from src.smoothquant import compute_perplexity
-    from src.smoothquant import get_model_size
-    from src.smoothquant import measure_inference_latency
-    from src.smoothquant import naive_quantize_model
-    from src.smoothquant import quantize_model_smoothquant
-    from src.utils import get_random_examples
-    from src.utils import load_calibration_data
-    from src.utils import load_model
+    from src.smoothquant import (compute_perplexity, get_model_size,
+                                 measure_inference_latency,
+                                 naive_quantize_model,
+                                 quantize_model_smoothquant)
+    from src.utils import (get_random_examples, load_calibration_data,
+                           load_model)
 
     # Load model and dataset
     print(f"  Loading model: {model_name}")

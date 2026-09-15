@@ -2,12 +2,9 @@ import numpy as np
 import pytest
 import torch
 
-from src import compute_perplexity
-from src import get_model_size
-from src import measure_inference_latency
-from src.smoothquant import SmoothQuantCalibrator
-from src.smoothquant import naive_quantize_model
-from src.smoothquant import quantize_model_smoothquant
+from src import compute_perplexity, get_model_size, measure_inference_latency
+from src.smoothquant import (SmoothQuantCalibrator, naive_quantize_model,
+                             quantize_model_smoothquant)
 
 
 def test_model_size():
