@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Interactive CLI + session-logged chat with SmoothQuant/FP32. Real-time streaming, token counts, technique label."""
-import os, time, json, datetime
+import os, sys, time, json, datetime
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import torch
 from transformers import AutoTokenizer, TextStreamer
 from src.utils import load_model
