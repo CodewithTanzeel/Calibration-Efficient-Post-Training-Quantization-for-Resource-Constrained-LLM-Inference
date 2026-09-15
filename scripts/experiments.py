@@ -119,7 +119,7 @@ def run_calibration_efficiency_study(model_name, dataset_name, calibration_sizes
 
     results = {}
     for size in calibration_sizes:
-        print(f"  Testing calibration size: {size}")
+        print("  Testing calibration size:", size)
         results[size] = run_baseline_experiment(model_name, dataset_name, calibration_size=size)
 
     return results
@@ -136,7 +136,7 @@ def run_parameter_optimization(model_name, dataset_name, alpha_values=[0.4, 0.5,
     # For this scaffold, we record the intended values
     results = {}
     for alpha in alpha_values:
-        print(f"  Alpha = {alpha} (would be tested with full dataset)")
+        print("  Alpha =", alpha, "(would be tested with full dataset)")
         results[alpha] = {
             'description': f'Smoothing parameter alpha={alpha}',
             'expected_effect': 'Different trade-off between perplexity and quantization accuracy'

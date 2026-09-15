@@ -11,8 +11,8 @@ perplexity = [18.5, 21.3, 19.1]
 size_mb = [500, 125, 125]
 latency_ms = [45.2, 18.7, 19.3]
 
-fig, ax = plt.subplots(figsize=(8,5))
-bars = ax.bar(labels, perplexity, color=['#2ca02c','#ff7f0e','#1f77b4'])
+fig, ax = plt.subplots(figsize=(8, 5))
+bars = ax.bar(labels, perplexity, color=['#2ca02c', '#ff7f0e', '#1f77b4'])
 ax.set_ylabel('Perplexity (lower = better)')
 ax.set_title('SmoothQuant: Perplexity vs Quantization Method')
 ax.set_ylim(15,25)
