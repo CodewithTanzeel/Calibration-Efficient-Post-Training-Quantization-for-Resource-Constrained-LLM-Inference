@@ -397,8 +397,12 @@ def compute_perplexity(model: nn.Module, dataloader, device: torch.device) -> fl
                 input_ids = batch['input_ids'].to(device)
                 labels = batch.get('labels', input_ids).to(device)
             else:
-                input_ids = batch.to(device)
-                labels = batch.to(device)
+                if isinstance(batch, (list, tuple)) and len(batch) == 2:
+                    input_ids = batch[0].to(device)
+                    labels = batch[1].to(device)
+                else:
+                    input_ids = batch.to(device)
+                    labels = batch.to(device)
 
             outputs = model(input_ids)
             logits = outputs.logits if hasattr(outputs, 'logits') else outputs

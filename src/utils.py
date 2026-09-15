@@ -55,7 +55,12 @@ def load_calibration_data(
     Returns:
         List of (input_ids, labels) tuples.
     """
-    dataset = load_dataset(dataset_name, 'wikitext-2-raw-v1', split=split, token=True)
+    try:
+        dataset = load_dataset(dataset_name, 'wikitext-2-raw-v1', split=split, token=True)
+    except Exception:
+        import pandas as pd
+        df = pd.read_parquet('data/raw/train-00000-of-00001.parquet')
+        dataset = Dataset.from_pandas(df)
     tokenizer = AutoTokenizer.from_pretrained('gpt2')
 
     if tokenizer.pad_token is None:
