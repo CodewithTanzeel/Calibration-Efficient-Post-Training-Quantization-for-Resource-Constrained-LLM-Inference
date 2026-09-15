@@ -41,7 +41,7 @@ def run_baseline_experiment(model_name, dataset_name, calibration_size=500):
     results = {}
 
     # FP32 baseline
-    print(f"  Testing FP32 baseline...")
+    print("  Testing FP32 baseline...")
     fp32_perplexity = compute_perplexity(model, calibration_examples, torch.device('cpu'))
     fp32_size = get_model_size(model)
     fp32_latency = measure_inference_latency(model, calibration_examples[0][0])
@@ -54,7 +54,7 @@ def run_baseline_experiment(model_name, dataset_name, calibration_size=500):
     print(f"    FP32: PPL={fp32_perplexity:.4f}, Size={fp32_size['size_mb']:.2f}MB, Latency={fp32_latency['latency_per_token_ms']:.2f}ms")
 
     # Naive INT8 quantization
-    print(f"  Testing naive INT8 quantization...")
+    print("  Testing naive INT8 quantization...")
     # Note: naive_quantize_model expects a list of tuples, not a single tensor
     # Create dummy data for the function
     dummy_input_ids = torch.randint(0, 1000, (1, 10))
@@ -80,7 +80,7 @@ def run_baseline_experiment(model_name, dataset_name, calibration_size=500):
     print(f"    Naive INT8: PPL={naive_perplexity:.4f}, Size={naive_size['size_mb']:.2f}MB, Latency={naive_latency['latency_per_token_ms']:.2f}ms")
 
     # SmoothQuant INT8
-    print(f"  Testing SmoothQuant INT8 (alpha=0.5)...")
+    print("  Testing SmoothQuant INT8 (alpha=0.5)...")
     try:
         smoothed_model, smoothing_factors = quantize_model_smoothquant(
             model, calibration_data, calibration_size, alpha=0.5, weight_bit=8, act_bit=8
@@ -112,7 +112,7 @@ def run_baseline_experiment(model_name, dataset_name, calibration_size=500):
 
 def run_calibration_efficiency_study(model_name, dataset_name, calibration_sizes=[50, 100, 500, 1000]):
     """Study how calibration size affects performance."""
-    print(f"Running calibration efficiency study")
+    print("Running calibration efficiency study")
     print(f"  Model: {model_name}")
     print(f"  Dataset: {dataset_name}")
     print(f"  Calibration sizes: {calibration_sizes}")
@@ -128,7 +128,7 @@ def run_calibration_efficiency_study(model_name, dataset_name, calibration_sizes
 def run_parameter_optimization(model_name, dataset_name, alpha_values=[0.4, 0.5, 0.6, 0.7, 0.8, 0.9]):
     """Study the effect of different smoothing parameter values."""
     print(f"Running parameter optimization")
-    print(f"  Model: {model_name}")
+    print("  Model: {model_name}")
     print(f"  Dataset: {dataset_name}")
     print(f"  Alpha values: {alpha_values}")
 
