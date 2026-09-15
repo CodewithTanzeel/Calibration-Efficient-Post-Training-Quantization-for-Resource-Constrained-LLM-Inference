@@ -5,14 +5,14 @@ This module contains scripts for running experiments with SmoothQuant.
 Uses proper module paths and includes all necessary imports.
 """
 
-import os
 import argparse
+import os
 import sys
+
+import torch
 
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-import torch
 
 
 def run_baseline_experiment(model_name, dataset_name, calibration_size=500):
@@ -20,14 +20,14 @@ def run_baseline_experiment(model_name, dataset_name, calibration_size=500):
     print(f"Running baseline experiment for {model_name} on {dataset_name}")
 
     # Import from source (lazy import for faster startup)
-    from src.smoothquant import (
-        quantize_model_smoothquant,
-        naive_quantize_model,
-        get_model_size,
-        measure_inference_latency,
-        compute_perplexity
-    )
-    from src.utils import load_model, load_calibration_data, get_random_examples
+    from src.smoothquant import compute_perplexity
+    from src.smoothquant import get_model_size
+    from src.smoothquant import measure_inference_latency
+    from src.smoothquant import naive_quantize_model
+    from src.smoothquant import quantize_model_smoothquant
+    from src.utils import get_random_examples
+    from src.utils import load_calibration_data
+    from src.utils import load_model
 
     # Load model and dataset
     print(f"  Loading model: {model_name}")

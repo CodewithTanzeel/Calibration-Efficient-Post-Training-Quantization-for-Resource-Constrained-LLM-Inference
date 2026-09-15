@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate plots from experiment results for the SmoothQuant project."""
 import os
+
 import matplotlib.pyplot as plt
 
 os.makedirs('plots', exist_ok=True)

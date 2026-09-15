@@ -10,11 +10,15 @@ This implementation focuses on:
 3. Applying per-channel quantization for weights and per-tensor quantization for activations
 """
 
+import copy
+from collections import defaultdict
+from typing import Dict
+from typing import List
+from typing import Optional
+from typing import Tuple
+
 import torch
 import torch.nn as nn
-from typing import Dict, List, Optional, Tuple
-from collections import defaultdict
-import copy
 
 
 class SmoothQuantCalibrator:
