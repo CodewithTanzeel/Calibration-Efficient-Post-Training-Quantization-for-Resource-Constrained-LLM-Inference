@@ -80,8 +80,11 @@ class SmoothQuantCalibrator:
                     _ = self.model(**batch)
                     count += batch.get('input_ids', batch).size(0)
                 elif isinstance(batch, (list, tuple)):
-                    _ = self.model(batch[0])
-                    count += batch[0].size(0)
+                    input_tensor = batch[0] if len(batch) > 0 else batch
+                    if input_tensor.dim() == 1 and input_tensor.numel() > 0:
+                        input_tensor = input_tensor.unsqueeze(0)
+                    _ = self.model(input_tensor)
+                    count += input_tensor.size(0) if input_tensor.dim() >= 1 else 1
                 else:
                     _ = self.model(batch)
                     count += batch.size(0)
@@ -403,6 +406,15 @@ def compute_perplexity(model: nn.Module, dataloader, device: torch.device) -> fl
                 else:
                     input_ids = batch.to(device)
                     labels = batch.to(device)
+
+            if input_ids.dim() == 0:
+                input_ids = input_ids.unsqueeze(0).unsqueeze(0)
+            elif input_ids.dim() == 1:
+                input_ids = input_ids.unsqueeze(0)
+            if labels.dim() == 0:
+                labels = labels.unsqueeze(0).unsqueeze(0)
+            elif labels.dim() == 1:
+                labels = labels.unsqueeze(0)
 
             outputs = model(input_ids)
             logits = outputs.logits if hasattr(outputs, 'logits') else outputs

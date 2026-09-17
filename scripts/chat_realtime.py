@@ -48,7 +48,8 @@ def chat():
         model = base
         label = "FP32"
 
-    print(f"Loaded: {label}. Type prompt; enter 'exit'; session logs to {SESSION_FILE}")
+    stream_batch = input("Streaming live? (y/n, default y): ").strip() or 'y'
+use_stream = stream_batch.lower().startswith('y')
     while True:
         user_input = input("> ")
         if user_input.lower() == 'exit':
