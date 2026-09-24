@@ -1,8 +1,7 @@
 # Calibration-Efficient Post-Training Quantization for LLM Inference (SmoothQuant)
-
 A complete research + engineering implementation of **SmoothQuant** (Xiao et al., ICML 2023) for CPU-constrained inference, with real dataset (36,718 rows), working quantized layers, interactive CLI, session logging, verified CI, and automated benchmarking pipeline.
 
----
+
 
 ## What this project actually is (verified, not aspirational)
 - **Core code**: `src/smoothquant.py` (calibrator + quantized Linear/Conv1d + smoothing formula + tuple fix `line 40` + epsilon/clamp `line 112-115`)
@@ -75,3 +74,4 @@ python scripts/chat_realtime.py
 - Attribution lines preserved (`Co-Authored-By: Claude Code`) on all commits from this session
 - No secrets exposed; no external credentials embedded
 
+??
